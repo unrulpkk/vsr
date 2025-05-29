@@ -26,5 +26,6 @@ RUN --mount=type=cache,target=/root/.cache,sharing=private \
     fi
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/python3.12/site-packages/nvidia/cudnn/lib/
+RUN pip install runpod
 WORKDIR /vsr
-CMD ["python", "/vsr/backend/main.py"]
+CMD ["python", "/vsr/my_worker.py"]
