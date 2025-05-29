@@ -5,6 +5,7 @@ import time
 import runpod
 import urllib
 import requests
+import traceback
 from backend.main import SubtitleRemover
 
 ALIYUN_ACCESS_KEY_ID = os.environ.get('ALIYUN_ACCESS_KEY_ID')
@@ -77,7 +78,8 @@ def is_even(job):
         "message": None
     }
     try:
-        video_url = job["video"]
+        job = job.get("input", {})
+        video_url = job["video_url"]
         video_path = down_file(video_url, os.path.join(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data'))
         ymin = job.get('ymin', None)
@@ -93,8 +95,9 @@ def is_even(job):
         oss_file_path = os.path.basename(output_path)
         result["output_video_url"] = upload_to_aliyun(output_path, oss_file_path)
     except Exception as e:
+        print(f"error: {traceback.format_exc()}")
         result["status"] = -1
-        result["message"] = str(e)
+        result["message"] = f"error: {traceback.format_exc()}"
     return result
 
 
