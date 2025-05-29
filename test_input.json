@@ -1,0 +1,9 @@
+{
+    "input":{
+        "video_file":"https://myaimaterialtemp.oss-cn-shanghai.aliyuncs.com/test15-44-15.mp4",
+        "ymin":848,
+ 	    "ymax":961,
+	    "xmin":407,
+         "xmax":1263
+    }
+}
